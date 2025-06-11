@@ -12,4 +12,12 @@ Sentry.init({
 
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,
+  integrations: [
+    Sentry.feedbackIntegration({
+      // Additional SDK configuration goes in here, for example:
+      colorScheme: "system",
+      isNameRequired: true,
+      isEmailRequired: true,
+    }),
+  ]
 });

@@ -6,26 +6,25 @@ import {
 } from "@/components/ui/accordion";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-// import {
-//   getUserCompanions,
-//   getUserSessions,
-//   getBookmarkedCompanions,
-// } from "@/lib/actions/companion.actions";
+import {
+  getUserCompanions,
+  getUserSessions,
+  getBookmarkedCompanions,
+} from "@/lib/actions/companion.actions";
 import Image from "next/image";
 import CompanionsList from "@/components/CompanionList";
-import { recentSessions } from "@/constants";
+
 
 const Profile = async () => {
   const user = await currentUser();
 
   if (!user) redirect("/sign-in");
 
-  // const companions = await getUserCompanions(user.id);
-  // const sessionHistory = await getUserSessions(user.id);
+  const companions = await getUserCompanions(user.id);
+  const sessionHistory = await getUserSessions(user.id);
   // const bookmarkedCompanions = await getBookmarkedCompanions(user.id);
 
-  const companions= recentSessions;
-
+ 
   return (
     <main className="min-lg:w-3/4">
       <section className="flex justify-between gap-4 max-sm:flex-col items-center">
@@ -55,7 +54,7 @@ const Profile = async () => {
                 width={22}
                 height={22}
               />
-              {/* <p className="text-2xl font-bold">{sessionHistory.length}</p> */}
+              <p className="text-2xl font-bold">{sessionHistory.length}</p>
               <p className="text-2xl font-bold">0</p>
             </div>
             <div>Lessons completed</div>
@@ -88,7 +87,7 @@ const Profile = async () => {
           <AccordionContent>
             <CompanionsList
               title="Recent Sessions"
-              // companions={sessionHistory}
+              companions={sessionHistory}
             />
           </AccordionContent>
         </AccordionItem>

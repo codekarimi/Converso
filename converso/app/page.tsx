@@ -4,10 +4,13 @@ import React from 'react'
 import {recentSessions} from "@/constants";
 import CTA from '@/components/CTA';
 import { getSubjectColor } from '@/lib/utils';
+import { getAllCompanions, getRecentSessions } from '@/lib/actions/companion.actions';
 
-const page = () => {
+const page = async () => {
 
-  const companions= recentSessions;
+  const companions = await getAllCompanions({ limit: 3 });
+  const recentSessionsCompanions = await getRecentSessions(10);
+  
   return (
     <main>
       <h1>Popular Companions </h1>
@@ -25,7 +28,7 @@ const page = () => {
 
       <CompanionList
                 title="Recently completed sessions"
-                companions={recentSessions}
+                companions={recentSessionsCompanions}
                 classNames="w-2/3 max-lg:w-full"
             />
             
