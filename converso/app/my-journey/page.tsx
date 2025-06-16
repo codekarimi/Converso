@@ -55,7 +55,6 @@ const Profile = async () => {
                 height={22}
               />
               <p className="text-2xl font-bold">{sessionHistory.length}</p>
-              <p className="text-2xl font-bold">0</p>
             </div>
             <div>Lessons completed</div>
           </div>
